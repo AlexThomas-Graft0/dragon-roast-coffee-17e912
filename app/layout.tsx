@@ -1,40 +1,26 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import "./globals.css";
+import './globals.css';
+import { DM_Serif_Display, Inter } from 'next/font/google';
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const serif = DM_Serif_Display({ subsets: ['latin'], weight: '400', variable: '--font-serif' });
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
-};
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  display: "swap",
-  subsets: ["latin"],
-});
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+      <body className="bg-[#F3E9D8] text-[#111827] font-sans antialiased">
+        <nav className="border-b border-black/10 py-6 px-8 flex justify-between items-center sticky top-0 bg-[#F3E9D8]/80 backdrop-blur-md z-50">
+          <h1 className="font-serif text-2xl font-bold">Dragon Roast</h1>
+          <div className="space-x-6 text-sm font-medium uppercase tracking-widest">
+            <a href="/" className="hover:text-[#C56A3C]">Home</a>
+            <a href="/shop" className="hover:text-[#C56A3C]">Shop</a>
+            <a href="/story" className="hover:text-[#C56A3C]">Our Story</a>
+            <a href="/visit" className="hover:text-[#C56A3C]">Visit</a>
+          </div>
+        </nav>
+        {children}
+        <footer className="py-12 px-8 border-t border-black/10 text-center">
+          <p>© {new Date().getFullYear()} Dragon Roast Coffee. Built in Cardiff.</p>
+        </footer>
       </body>
     </html>
   );
