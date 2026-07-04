@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-
 import { createClient } from "@/lib/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { FetchDataSteps } from "@/components/tutorial/fetch-data-steps";
@@ -7,13 +6,13 @@ import { Suspense } from "react";
 
 async function UserDetails() {
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.getClaims();
+  const { data, error } = await supabase.auth.getUser();
 
-  if (error || !data?.claims) {
+  if (error || !data?.user) {
     redirect("/auth/login");
   }
 
-  return JSON.stringify(data.claims, null, 2);
+  return JSON.stringify(data.user, null, 2);
 }
 
 export default function ProtectedPage() {
@@ -28,7 +27,7 @@ export default function ProtectedPage() {
       </div>
       <div className="flex flex-col gap-2 items-start">
         <h2 className="font-bold text-2xl mb-4">Your user details</h2>
-        <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto">
+        <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto w-full">
           <Suspense>
             <UserDetails />
           </Suspense>
