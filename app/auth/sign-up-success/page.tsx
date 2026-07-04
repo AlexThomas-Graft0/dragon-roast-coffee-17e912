@@ -8,20 +8,19 @@ import {
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10 bg-[#FAF9F6]">
       <div className="w-full max-w-sm">
         <div className="flex flex-col gap-6">
-          <Card>
+          <Card className="border-black/5 shadow-xl bg-white/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-2xl">
-                Thank you for signing up!
+              <CardTitle className="text-2xl font-serif text-[#2D2420]">
+                Thank you for joining!
               </CardTitle>
-              <CardDescription>Check your email to confirm</CardDescription>
+              <CardDescription>Check your inbox to confirm.</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                You&apos;ve successfully signed up. Please check your email to
-                confirm your account before signing in.
+                We&apos;ve sent a confirmation email. Please verify your account to start roasting.
               </p>
             </CardContent>
           </Card>

@@ -30,13 +30,13 @@ export default async function Page({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10 bg-[#FAF9F6]">
       <div className="w-full max-w-sm">
         <div className="flex flex-col gap-6">
-          <Card>
+          <Card className="border-black/5 shadow-xl bg-white/80 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-2xl">
-                Sorry, something went wrong.
+              <CardTitle className="text-2xl font-serif text-[#2D2420]">
+                Something went wrong
               </CardTitle>
             </CardHeader>
             <CardContent>
