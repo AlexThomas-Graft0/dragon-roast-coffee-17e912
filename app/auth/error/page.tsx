@@ -4,15 +4,16 @@ import { Suspense } from "react";
 async function ErrorContent({
   searchParams,
 }: {
-  searchParams: Promise<{ error: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const params = await searchParams;
+  const error = typeof params.error === 'string' ? params.error : undefined;
 
   return (
     <>
-      {params?.error ? (
+      {error ? (
         <p className="text-sm text-muted-foreground">
-          Code error: {params.error}
+          Code error: {error}
         </p>
       ) : (
         <p className="text-sm text-muted-foreground">
@@ -26,7 +27,7 @@ async function ErrorContent({
 export default function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ error: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
