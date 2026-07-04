@@ -1,5 +1,6 @@
 import './globals.css';
 import { DM_Serif_Display, Inter } from 'next/font/google';
+import FooterDate from './components/FooterDate';
 
 const serif = DM_Serif_Display({ subsets: ['latin'], weight: '400', variable: '--font-serif' });
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans' });
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </nav>
         {children}
         <footer className="py-12 px-8 border-t border-black/10 text-center">
-          <p>© {new Date().getFullYear()} Dragon Roast Coffee. Built in Cardiff.</p>
+          <FooterDate />
         </footer>
       </body>
     </html>
