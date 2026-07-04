@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Suspense } from "react";
+import { AlertCircle } from "lucide-react";
 
 async function ErrorContent({
   searchParams,
@@ -10,17 +11,12 @@ async function ErrorContent({
   const error = typeof params.error === 'string' ? params.error : undefined;
 
   return (
-    <>
-      {error ? (
-        <p className="text-sm text-muted-foreground">
-          Code error: {error}
-        </p>
-      ) : (
-        <p className="text-sm text-muted-foreground">
-          An unspecified error occurred.
-        </p>
-      )}
-    </>
+    <div className="flex items-center gap-3 text-red-700 bg-red-50 p-4 rounded-lg border border-red-100">
+      <AlertCircle className="size-5 shrink-0" />
+      <p className="text-sm font-medium">
+        {error || "An unexpected error occurred during authentication."}
+      </p>
+    </div>
   );
 }
 
@@ -33,14 +29,12 @@ export default async function Page({
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10 bg-[#FAF9F6]">
       <div className="w-full max-w-sm">
         <div className="flex flex-col gap-6">
-          <Card className="border-black/5 shadow-xl bg-white/80 backdrop-blur-sm">
+          <Card className="border-black/5 shadow-2xl bg-white">
             <CardHeader>
-              <CardTitle className="text-2xl font-serif text-[#2D2420]">
-                Something went wrong
-              </CardTitle>
+              <CardTitle className="text-3xl font-serif text-[#2D2420]">Authentication Error</CardTitle>
             </CardHeader>
             <CardContent>
-              <Suspense>
+              <Suspense fallback={<div className="h-20 animate-pulse bg-gray-100 rounded-lg" />}>
                 <ErrorContent searchParams={searchParams} />
               </Suspense>
             </CardContent>
