@@ -1,58 +1,32 @@
-import { DeployButton } from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { AuthButton } from "@/components/auth-button";
-import { Hero } from "@/components/hero";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-steps";
-import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/lib/utils";
-import Link from "next/link";
-import { Suspense } from "react";
+'use client';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-            <div className="flex gap-5 items-center font-semibold">
-              <Link href={"/"}>Next.js Supabase Starter</Link>
-              <div className="flex items-center gap-2">
-                <DeployButton />
-              </div>
-            </div>
-            {!hasEnvVars ? (
-              <EnvVarWarning />
-            ) : (
-              <Suspense>
-                <AuthButton />
-              </Suspense>
-            )}
-          </div>
-        </nav>
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-          <Hero />
-          <main className="flex-1 flex flex-col gap-6 px-4">
-            <h2 className="font-medium text-xl mb-4">Next steps</h2>
-            {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-          </main>
+    <main className="min-h-screen">
+      <header className="py-24 px-8 text-center max-w-4xl mx-auto">
+        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-6xl md:text-8xl mb-8">
+          Small-Batch Roasts, Big Cardiff Character.
+        </motion.h1>
+        <p className="text-xl mb-12 opacity-80">We source, roast, and pour specialty coffee right here in the heart of Wales. From the first spark of the roast to your morning ritual, we bring precision and passion to every cup.</p>
+        <div className="space-x-4">
+          <a href="/shop" className="bg-[#C56A3C] text-white px-8 py-4 rounded-full font-bold hover:bg-black transition">Shop the Roast</a>
+          <a href="/visit" className="border border-black px-8 py-4 rounded-full font-bold hover:bg-black hover:text-white transition">Find Our Café</a>
         </div>
-
-        <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-          <p>
-            Powered by{" "}
-            <a
-              href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-              target="_blank"
-              className="font-bold hover:underline"
-              rel="noreferrer"
-            >
-              Supabase
-            </a>
-          </p>
-          <ThemeSwitcher />
-        </footer>
-      </div>
+      </header>
+      
+      <section className="grid md:grid-cols-3 gap-8 py-16 px-8 max-w-6xl mx-auto">
+        {[
+          { title: "100% Ethically Sourced", desc: "Direct trade relationships ensuring farmers thrive." },
+          { title: "Small-Batch Roasted", desc: "Precision roasting for peak flavor development." },
+          { title: "Cardiff-Born", desc: "Independently owned and passionately brewed." }
+        ].map((item, i) => (
+          <div key={i} className="p-8 bg-white/50 rounded-2xl border border-black/5">
+            <h3 className="text-2xl mb-4">{item.title}</h3>
+            <p className="opacity-70">{item.desc}</p>
+          </div>
+        ))}
+      </section>
     </main>
   );
 }
