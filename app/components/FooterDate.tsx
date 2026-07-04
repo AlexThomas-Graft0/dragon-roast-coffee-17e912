@@ -1,6 +1,5 @@
 'use client';
 
 export default function FooterDate() {
-  // Hardcoded to avoid new Date() during render
-  return <p>© 2025 Dragon Roast Coffee. Built in Cardiff.</p>;
+  return <p className="text-sm opacity-60">© 2025 Dragon Roast Coffee. Built in Cardiff.</p>;
 }
